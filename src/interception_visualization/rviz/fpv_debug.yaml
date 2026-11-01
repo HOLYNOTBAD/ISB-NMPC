@@ -1,0 +1,7 @@
+# FPV debug image settings used by fpv_los_overlay.py.
+# The detector still runs on the full-resolution camera image; these settings
+# only control the image published for RViz and replay visualization.
+output_width: 640
+output_height: 480
+max_output_rate_hz: 30.0
+show_telemetry_hud: true

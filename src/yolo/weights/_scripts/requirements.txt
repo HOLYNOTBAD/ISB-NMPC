@@ -1,0 +1,15 @@
+# Python dependencies for YOLOv5 .pt -> .wts export.
+# Install torch and torchvision separately with versions matching JetPack/CUDA.
+numpy<1.24
+opencv-python
+matplotlib<3.8
+pandas<2.1
+Pillow
+PyYAML
+requests
+scipy
+seaborn<0.13
+tqdm
+ipython<9
+psutil
+thop

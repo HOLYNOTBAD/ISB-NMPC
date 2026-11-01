@@ -1,0 +1,17 @@
+motion_mode: random_walk
+target_num: 1
+random_walk_speed: 5.0
+random_walk_z_scale: 0.35
+random_walk_interval: 3.0
+random_walk_acceleration: 1.5
+random_walk_seed: -1
+trajectory_max_points: 12000
+trajectory_min_distance: 0.05
+
+balloons:
+  - id: 1
+    pos: [100.0, 0.0, 0.0]
+    vel: [0.0, 0.0, 0.0]
+
+# Comparison balloon diameter: 3.0 m (radius 1.50 m).
+interception_check_enabled: true

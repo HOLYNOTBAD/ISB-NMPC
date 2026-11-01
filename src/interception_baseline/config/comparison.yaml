@@ -1,0 +1,74 @@
+# Shared fair-limit profile for comparison baseline controllers.
+# controller_type is selected by the loop_comparison controller scheduler.
+controller_type: backstepping
+
+control_rate: 50.0
+attitude_target_topic: /mavros/setpoint_raw/attitude
+velocity_target_topic: /mavros/setpoint_velocity/cmd_vel
+acceleration_target_topic: /mavros/setpoint_raw/local
+state_estimate_topic: /nmpc/uavStateEstimate
+target_state_estimate_topic: /nmpc/targetStateEstimate
+p_image_topic: /nmpc/p_image
+fsm_state_topic: /fsm/fsm_state
+
+image_timeout: 0.5
+state_timeout: 0.5
+target_timeout: 0.5
+p_image_is_normalized: true
+
+# Camera RDF -> body FLU is read from /camera/R_cam_body.
+n_cc: [0.0, 0.0, 1.0]
+
+max_rate: 3.0
+max_body_rate: 3.0
+max_body_rate_x: 3.0
+max_body_rate_y: 3.0
+max_body_rate_z: 1.2
+max_acceleration: 6.0
+
+# rotate_highspeed_attack
+v_norm_d: 12.0
+rotate_highspeed_max_speed: 12.0
+
+# backstepping
+mass: 1.2
+hover_acceleration: 10.0
+hover_thrust: 0.3
+drag_coefficient: 0.073
+# <= 0 derives the barrier from camera intrinsics and the margin below.
+backstepping_k_b: -1.0
+# Keep the target inside a tighter central window than SO3NMPC. With the
+# 640x480, f=369 camera this gives a vertical half-angle of about 14 degrees.
+backstepping_image_bound_margin: 0.4
+backstepping_c_1: 0.8
+backstepping_c_2: 0.8
+backstepping_c_3: 0.3
+backstepping_approach_speed: 8.0
+backstepping_omega_damping: 0.05
+backstepping_omega_max: 2.5
+backstepping_omega_slew_max: 10.0
+backstepping_omega_filter_tau: 0.06
+backstepping_barrier_gain_max: 30.0
+backstepping_tilt_max_deg: 12.0
+backstepping_los_distance_floor: 5.0
+backstepping_max_intercept_speed: 12.0
+backstepping_speed_guard_band: 2.0
+backstepping_speed_brake_gain: 3.0
+backstepping_attitude_gain: 2.5
+
+# pslos
+pslos_k1: 0.8
+pslos_k2: 1.4
+pslos_k_los: 1.0
+pslos_kb: 0.16
+pslos_k_att: 2.2
+pslos_accel_max: 5.5
+pslos_max_intercept_speed: 12.0
+pslos_speed_guard_band: 2.0
+pslos_speed_brake_gain: 3.0
+pslos_omega_max: 2.5
+pslos_omega_slew_max: 12.0
+pslos_thrust_min: 0.0
+pslos_thrust_max: 40.0
+pslos_designed_los_pitch_deg: 0.0
+pslos_los_distance_floor: 5.0

@@ -1,0 +1,91 @@
+fsm:
+  type: interception
+
+manager:
+  has_target_pos: false
+
+interception:
+  # ground_takeoff: 地面按 Enter 锁定原点；airborne_takeover: 空中切 OFFBOARD 锁定原点。
+  start_mode: ground_takeoff
+  offboard_takeover_hold_sec: 0.5
+  initialization:
+    settle_sec: 0.5
+    max_speed: 0.3                 # 三维速度上限 [m/s]
+    max_position_change: 0.2       # 稳定窗口内相对起点最大偏移 [m]
+    max_yaw_change_deg: 5.0
+  offboard:
+    warmup_setpoints: 50
+    mode_request_interval: 2.0
+    arm_request_interval: 2.0
+  idle:
+    start_x: 0.0
+    start_y: 0.0
+    start_z: 15.0
+    vertical_speed: 4.0
+    horizontal_speed: 3.0
+    yaw_rate: 0.5
+    # Add damping to the long RETURN_TO_START cruise to avoid repeatedly
+    # crossing the return path and winding up near the origin.
+    horizontal_kp: 1.5
+    horizontal_kd: 1.8
+    horizontal_ki: 0.0
+    horizontal_i_limit: 1.0
+    vertical_kp: 2.0
+    vertical_kd: 0.8
+    yaw_kp: 1.0
+    horizontal_accel: 2.0
+    vertical_accel: 1.5
+    velocity_bias_x: 0.0
+    velocity_bias_y: 0.0
+    position_tolerance: 0.3
+    frame_id: map
+  hold:
+    # 普通丢失目标后先在 OFFBOARD 下用零速度指令制动，停稳后锁定实际停止点。
+    brake_speed_threshold: 0.3
+    brake_settle_time: 0.3
+    brake_timeout: 8.0  # 仅告警；未停稳不会切换到位置悬停
+  finish_hold:
+    # 拦截结束后先给 PX4 零速度指令主动制动，真正停稳后才锁定位置。
+    brake_speed_threshold: 0.3  # 三维速度低于该值才视为接近停稳 [m/s]
+    brake_settle_time: 0.3      # 必须连续满足速度阈值的时间 [s]
+    brake_timeout: 8.0          # 仅告警；未停稳不会返航 [s]
+  failsafe:
+    # All angles are evaluated from the measured vehicle attitude. A severe
+    # localization/state failure leaves position control and remains in PX4's
+    # attitude-only STABILIZED mode for pilot intervention.
+    max_abs_roll_deg: 80.0
+    # FCU heartbeat/state arrives at about 1 Hz; allow missed-heartbeat margin.
+    mavros_state_timeout: 2.5
+    # MAVROS estimator status must be fresh and report valid horizontal and
+    # vertical position before manual takeover; loss during active flight
+    # states requests STABILIZED and latches for pilot intervention.
+    estimator_status_timeout: 2.5
+    # Local pose and velocity must each arrive within this interval; a stalled
+    # stream during manual takeover requests STABILIZED.
+    local_state_timeout: 0.5
+  # 两种模式都显式锁定实验坐标系，X 对齐锁定时机头，Z 向上。
+  # 不再使用第一帧定位或第一帧航向作为实验原点。
+  state_estimate:
+    topic: /nmpc/uavStateEstimate
+    fsm_state_topic: /fsm/fsm_state
+  target_state_estimate:
+    topic: /nmpc/targetStateEstimate
+    timeout: 0.5
+  exec:
+    motion_trigger_topic: /fsm/motion_trigger
+    intercepted_topic: /fsm/intercepted
+    nmpc_failure_topic: /nmpc/failure
+    detection_mode_topic: /target_detection/mode
+    # 普通视觉丢失仍使用 estimator/q_image_timeout (0.3 s)。最近处于
+    # TRACK_LR 时，使用更短超时并将丢失解释为末制导结束。
+    terminal_lost_timeout: 0.05
+    terminal_mode_memory: 0.5
+    require_enter_confirmation: true
+    tracking_hold_enter_distance: 0.3
+    tracking_hold_exit_distance: 0.2
+    tracking_lost_distance: 0.5
+    tracking_lost_confirmation_sec: 0.15
+    tracking_max_hold_sec: 2.0
+    horizon_duration: 2.0
+    sample_dt: 0.1
+    horizon_points: 20

@@ -1,0 +1,159 @@
+# =============================================================================
+# Interception Baseline - default parameters
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Active controller
+# -----------------------------------------------------------------------------
+# Supported controller_type values:
+#   ✅backstepping              -> [body_rate_x, body_rate_y, body_rate_z, thrust]
+#   ✅pslos                     -> [body_rate_x, body_rate_y, body_rate_z, thrust]
+#   ✅basic_attack             -> [velocity_x, velocity_y, velocity_z, yaw_rate]
+#   ✅rotate_attack（1）            -> [velocity_x, velocity_y, velocity_z, yaw_rate]
+#   ✅rotate_highspeed_attack（2）  -> [velocity_x, velocity_y, velocity_z, yaw_rate]
+#   ✅rotate_attack_accel      -> [accel_x, accel_y, accel_z, yaw_rate]
+#   ✅rotate_attack_accel2     -> [accel_x, accel_y, accel_z, yaw_rate]
+#   ✅rotate_attack_accel2vel  -> [velocity_x, velocity_y, velocity_z, yaw_rate]
+#   ❌docking                  -> [velocity_x, velocity_y, velocity_z, yaw_rate]
+controller_type: rotate_highspeed_attack
+
+# -----------------------------------------------------------------------------
+# ROS bridge node
+# -----------------------------------------------------------------------------
+control_rate: 50.0
+attitude_target_topic: /mavros/setpoint_raw/attitude
+velocity_target_topic: /mavros/setpoint_velocity/cmd_vel
+acceleration_target_topic: /mavros/setpoint_raw/local
+state_estimate_topic: /nmpc/uavStateEstimate
+target_state_estimate_topic: /nmpc/targetStateEstimate
+p_image_topic: /nmpc/p_image
+fsm_state_topic: /fsm/fsm_state
+
+image_timeout: 0.5
+state_timeout: 0.5
+target_timeout: 0.5
+
+# /nmpc/p_image is published by target_estimate as a normalized ray:
+# x=(u-cx)/f, y=(v-cy)/f, z=1.0.
+p_image_is_normalized: true
+
+# -----------------------------------------------------------------------------
+# Shared camera geometry
+# -----------------------------------------------------------------------------
+# Camera RDF -> body FLU rotation is read from /camera/R_cam_body.
+n_cc: [0.0, 0.0, 1.0]
+
+# -----------------------------------------------------------------------------
+# Shared command limits
+# -----------------------------------------------------------------------------
+max_rate: 3.0       # legacy alias used as fallback for max_body_rate [rad/s]
+max_body_rate: 3.0  # yaw/body-rate command limit [rad/s]
+max_body_rate_x: 3.0
+max_body_rate_y: 3.0
+max_body_rate_z: 3.0
+
+# Used by rotate_attack_accel and rotate_attack_accel2 before publishing
+# mavros_msgs/PositionTarget.
+max_acceleration: 6.0
+
+# -----------------------------------------------------------------------------
+# basic_attack
+# -----------------------------------------------------------------------------
+# No YAML parameters. The controller currently uses fixed gains in attack.py.
+
+# -----------------------------------------------------------------------------
+# rotate_attack
+# -----------------------------------------------------------------------------
+# Original values:
+#   forward_ramp=0.03, forward_speed_max=10.0, lateral_gain=12.0,
+#   vertical_gain=10.0, yaw_gain=0.002.
+# If rotate_attack passes below the balloon, reduce forward_ramp and/or increase
+# vertical_gain.
+rotate_attack_forward_ramp: 0.02
+rotate_attack_forward_speed_max: 10.0
+rotate_attack_lateral_gain: 15.0
+rotate_attack_vertical_gain: 12.0
+rotate_attack_yaw_gain: 0.002
+
+# -----------------------------------------------------------------------------
+# rotate_highspeed_attack
+# -----------------------------------------------------------------------------
+v_norm_d: 12.0
+rotate_highspeed_max_speed: 12.0
+
+# -----------------------------------------------------------------------------
+# rotate_attack_accel
+# -----------------------------------------------------------------------------
+# No dedicated YAML parameters yet. Uses shared camera geometry and
+# max_acceleration.
+
+# -----------------------------------------------------------------------------
+# rotate_attack_accel2
+# -----------------------------------------------------------------------------
+# No dedicated YAML parameters yet. Uses shared camera geometry and
+# max_acceleration.
+
+# -----------------------------------------------------------------------------
+# rotate_attack_accel2vel
+# -----------------------------------------------------------------------------
+# No dedicated YAML parameters yet. Uses shared camera geometry.
+
+# -----------------------------------------------------------------------------
+# docking
+# -----------------------------------------------------------------------------
+docking_kvod: 2.5
+docking_v_approach: 1.0
+
+# -----------------------------------------------------------------------------
+# backstepping
+# -----------------------------------------------------------------------------
+mass: 1.2                 # vehicle mass [kg]
+hover_acceleration: 10.0  # gravity in simulation [m/s^2]
+hover_thrust: 0.3         # normalized throttle at hover
+drag_coefficient: 0.073
+# <= 0 derives the barrier from camera intrinsics and the margin below.
+backstepping_k_b: -1.0
+backstepping_image_bound_margin: 0.3
+backstepping_c_1: 1.0
+backstepping_c_2: 0.8
+backstepping_c_3: 0.3
+backstepping_approach_speed: 10.0
+backstepping_omega_damping: 0.1
+backstepping_omega_max: 2.5
+backstepping_omega_slew_max: 12.0
+backstepping_omega_filter_tau: 0.08
+backstepping_barrier_gain_max: 20.0
+backstepping_tilt_max_deg: 20.0
+backstepping_los_distance_floor: 5.0
+backstepping_max_intercept_speed: 12.0
+backstepping_speed_guard_band: 2.0
+backstepping_speed_brake_gain: 3.0
+backstepping_attitude_gain: 2.5
+
+# -----------------------------------------------------------------------------
+# pslos (high-speed IBVS-SO3 controller)
+# -----------------------------------------------------------------------------
+pslos_k1: 0.8
+pslos_k2: 1.4
+pslos_k_los: 1.5
+pslos_kb: 0.16
+pslos_k_att: 2.8
+pslos_accel_max: 6.0             # desired translational acceleration [m/s^2]
+pslos_max_intercept_speed: 12.0  # UAV interception-speed ceiling [m/s]
+pslos_speed_guard_band: 2.0      # fade forward acceleration from 10 to 12 m/s
+pslos_speed_brake_gain: 4.0      # overspeed braking gain [1/s]
+pslos_omega_max: 3.0             # internal body-rate norm limit [rad/s]
+pslos_omega_slew_max: 8.0        # body-rate command slew limit [rad/s^2]
+pslos_thrust_min: 0.0            # physical thrust limit [N]
+pslos_thrust_max: 40.0           # physical thrust limit [N]
+pslos_designed_los_pitch_deg: 0.0
+pslos_los_distance_floor: 5.0    # prevent terminal LOS gain amplification
+
+# -----------------------------------------------------------------------------
+# Legacy guidance parameters
+# -----------------------------------------------------------------------------
+# These are kept for old experiments/utilities. The current bridge node does not
+# select PN/PP/RAT controllers from controller_type.
+guidance_pn_N: 4.0
+guidance_pp_gain: 2.0
+guidance_rat_intercept_speed: 14.0

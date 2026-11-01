@@ -1,0 +1,248 @@
+{
+  "source_presentation": "video/ISB-NMPC.pptx",
+  "source_date": "not independently verified",
+  "code_baseline": "905ee8566494c5b0f6ddecd91ce2175d8c95f408",
+  "relationship_to_code": "Research presentation recordings; the exact firmware and controller commit used to record each clip are not encoded in the presentation. These are not new experiments performed during repository cleanup.",
+  "assets": [
+    {
+      "file": "long-range-fpv.mp4",
+      "slide": 13,
+      "shape_name": "longrange_fpv_hud",
+      "pptx_member": "ppt/media/media17.mp4",
+      "source_sha256": "80187e1d69af977999913de69c0f7c9dab000b801e837462bc19b8ef061d7c99",
+      "source": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1920,
+            "height": 1080,
+            "pix_fmt": "yuv420p"
+          }
+        ],
+        "format": {
+          "duration": "10.677333",
+          "size": "22603078"
+        }
+      },
+      "output_sha256": "2ba212df8f5d20d5b35b101afbf17be4f8ec2cb95cde17530f2d5e63343a856f",
+      "output": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1280,
+            "height": 720,
+            "pix_fmt": "yuv420p"
+          }
+        ],
+        "format": {
+          "duration": "10.667000",
+          "size": "1295395"
+        }
+      },
+      "processing": {
+        "full_embedded_clip": true,
+        "additional_speed_factor": 1,
+        "audio": "removed",
+        "metadata": "removed",
+        "video": "H.264, CRF 25, 30 fps, yuv420p, width <=1280, faststart"
+      },
+      "preview": {
+        "file": "long-range-fpv.gif",
+        "sha256": "8d87b060731ceb2c9006e2193b800f0094384c7fdea7873d53ed858c81025489",
+        "size_bytes": 2321743,
+        "processing": "full embedded clip, 8 fps, 384 px wide, 64 colors, looping; black side bars removed"
+      }
+    },
+    {
+      "file": "long-range-overhead.mp4",
+      "slide": 13,
+      "shape_name": "longrange_shadow",
+      "pptx_member": "ppt/media/media16.mp4",
+      "source_sha256": "eda80c1f83a8f5ef5b158e3c4d1a86d3d8db481200f4902968ced27b6afbedb5",
+      "source": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1920,
+            "height": 1080,
+            "pix_fmt": "yuv420p"
+          }
+        ],
+        "format": {
+          "duration": "12.034000",
+          "size": "7261251"
+        }
+      },
+      "output_sha256": "fcb33f0eb1dfc67d191f711df1d32448f33a5c6b74278e4e70c7a4850dd1e020",
+      "output": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1280,
+            "height": 720,
+            "pix_fmt": "yuv420p"
+          }
+        ],
+        "format": {
+          "duration": "12.034000",
+          "size": "642279"
+        }
+      },
+      "processing": {
+        "full_embedded_clip": true,
+        "additional_speed_factor": 1,
+        "audio": "removed",
+        "metadata": "removed",
+        "video": "H.264, CRF 25, 30 fps, yuv420p, width <=1280, faststart"
+      }
+    },
+    {
+      "file": "maneuvering-fpv.mp4",
+      "slide": 15,
+      "shape_name": "chasing_fpv_hud",
+      "pptx_member": "ppt/media/media19.mp4",
+      "source_sha256": "37c94c5ea50232fd5a83ea2674e4f6d5d7411d4e389bcedea1b167925076d77a",
+      "source": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 2592,
+            "height": 1944,
+            "pix_fmt": "yuv420p"
+          }
+        ],
+        "format": {
+          "duration": "12.300000",
+          "size": "51402888"
+        }
+      },
+      "output_sha256": "ed80dad7c9e02bd46f3bfe465f5163a479f4549e09e9345532e60ff7aee5ee21",
+      "output": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1280,
+            "height": 960,
+            "pix_fmt": "yuv420p"
+          }
+        ],
+        "format": {
+          "duration": "12.300000",
+          "size": "2496464"
+        }
+      },
+      "processing": {
+        "full_embedded_clip": true,
+        "additional_speed_factor": 1,
+        "audio": "removed",
+        "metadata": "removed",
+        "video": "H.264, CRF 25, 30 fps, yuv420p, width <=1280, faststart"
+      },
+      "preview": {
+        "file": "maneuvering-fpv.gif",
+        "sha256": "c6d6911ef66669e6b2ffec87822c74b8a79f1cb09ef2aaa06e4a4110714b558e",
+        "size_bytes": 2908328,
+        "processing": "full embedded clip, 8 fps, 384 px wide, 64 colors, looping"
+      }
+    },
+    {
+      "file": "maneuvering-external.mp4",
+      "slide": 15,
+      "shape_name": "chasing_shadow",
+      "pptx_member": "ppt/media/media18.mp4",
+      "source_sha256": "06342e550655eeb0ba2c664bfdbd2d2932e0b0b838569d6f6f11ea0f5e10eef2",
+      "source": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1920,
+            "height": 684,
+            "pix_fmt": "yuv420p"
+          }
+        ],
+        "format": {
+          "duration": "13.900000",
+          "size": "4893637"
+        }
+      },
+      "output_sha256": "96639414311d5878de6a2d687643d13ed4f3d503ea4f71f48560d0598f2b1fc3",
+      "output": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1280,
+            "height": 456,
+            "pix_fmt": "yuv420p"
+          }
+        ],
+        "format": {
+          "duration": "13.900000",
+          "size": "398122"
+        }
+      },
+      "processing": {
+        "full_embedded_clip": true,
+        "additional_speed_factor": 1,
+        "audio": "removed",
+        "metadata": "removed",
+        "video": "H.264, CRF 25, 30 fps, yuv420p, width <=1280, faststart"
+      }
+    },
+    {
+      "file": "simulation.mp4",
+      "slide": 10,
+      "shape_name": "ISB-NMPC_10x_count",
+      "pptx_member": "ppt/media/media10.mp4",
+      "source_sha256": "bcb9d918d734d9ccaa80d57305f75514abb8ce1e25c962c14db72b0a7291916a",
+      "source": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1838,
+            "height": 982,
+            "pix_fmt": "yuv420p"
+          }
+        ],
+        "format": {
+          "duration": "14.600000",
+          "size": "3135408"
+        }
+      },
+      "output_sha256": "6d697d09a69b8f63204c502d99afc8fb98b6475c56dde519f53baffbb5763dbd",
+      "output": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1280,
+            "height": 684,
+            "pix_fmt": "yuv420p"
+          }
+        ],
+        "format": {
+          "duration": "14.600000",
+          "size": "372034"
+        }
+      },
+      "processing": {
+        "full_embedded_clip": true,
+        "additional_speed_factor": 1,
+        "audio": "removed",
+        "metadata": "removed",
+        "video": "H.264, CRF 25, 30 fps, yuv420p, width <=1280, faststart"
+      }
+    }
+  ],
+  "source_presentation_sha256": "4c22c0b000951309c1200f57f8199b05496bfabf942b052c6819af35ac34ec33",
+  "source_presentation_size_bytes": 826169138,
+  "processed_date": "2026-10-19"
+}

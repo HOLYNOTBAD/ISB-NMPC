@@ -1,0 +1,16 @@
+<launch>
+  <arg name="image_topic" default="/camera/image_raw"/>
+  <arg name="detection_topic" default="/tracker/p_image_hsv"/>
+  <arg name="show_rgb" default="false"/>
+  <arg name="show_hsv" default="false"/>
+
+  <node pkg="target_detection_hsv"
+        type="target_detection_hsv_node"
+        name="target_detection_hsv"
+        output="screen">
+    <param name="image_topic" value="$(arg image_topic)"/>
+    <param name="detection_topic" value="$(arg detection_topic)"/>
+    <param name="show_rgb" value="$(arg show_rgb)"/>
+    <param name="show_hsv" value="$(arg show_hsv)"/>
+  </node>
+</launch>

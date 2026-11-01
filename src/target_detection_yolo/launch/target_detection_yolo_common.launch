@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Internal implementation shared by the sim and real entry points. -->
+  <arg name="config_file"
+       default="$(find target_detection_yolo)/config/detection_fsm.yaml" />
+  <arg name="engine_file" />
+  <arg name="input_image_topic" default="/camera/image_raw" />
+  <arg name="output_bbox_topic" default="/tracker/bbox_raw" />
+  <arg name="mode_topic" default="/target_detection/mode" />
+  <arg name="roi_topic" default="/target_detection/roi" />
+  <arg name="debug_image_topic" default="/target_detection/fpv_source" />
+  <arg name="debug_image_rate_hz" default="10.0" />
+
+  <rosparam command="load" file="$(arg config_file)" />
+
+  <node name="target_detection_yolo_node"
+        pkg="target_detection_yolo"
+        type="target_detection_yolo_node"
+        output="screen">
+    <param name="engine_file" value="$(arg engine_file)" />
+    <param name="input_image_topic" value="$(arg input_image_topic)" />
+    <param name="output_bbox_topic" value="$(arg output_bbox_topic)" />
+    <param name="mode_topic" value="$(arg mode_topic)" />
+    <param name="roi_topic" value="$(arg roi_topic)" />
+    <param name="debug_image_topic" value="$(arg debug_image_topic)" />
+    <param name="debug_image_rate_hz" value="$(arg debug_image_rate_hz)" />
+  </node>
+</launch>

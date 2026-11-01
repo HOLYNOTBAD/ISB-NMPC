@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+  <group ns="camera">
+    <!-- Keep this node name compatible with the existing
+         /camera/usb_cam_driver parameter block in camera YAML files. -->
+    <node pkg="camera_driver" type="parallel_mjpeg_camera_node"
+          name="usb_cam_driver" output="screen" respawn="false" />
+  </group>
+</launch>

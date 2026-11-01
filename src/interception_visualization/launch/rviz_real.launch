@@ -1,0 +1,9 @@
+<launch>
+  <include file="$(find interception_visualization)/launch/rviz_view.launch">
+    <arg name="config_path" value="$(find interception_visualization)/rviz/interception_real.rviz"/>
+    <arg name="fpv_los_input_topic" value="/target_detection/fpv_source"/>
+    <arg name="fpv_yolo_bbox_topic" value="$(optenv DETECTION_OUTPUT_BBOX_TOPIC /tracker/bbox_raw)"/>
+    <arg name="uav_mesh_resource" value="package://holydrone/gazebo/models/holydrone/meshes/holydrone_v1.STL"/>
+    <arg name="show_baylands_mesh" value="false"/>
+  </include>
+</launch>

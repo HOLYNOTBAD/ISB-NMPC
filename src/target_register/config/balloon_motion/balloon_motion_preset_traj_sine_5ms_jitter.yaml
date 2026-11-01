@@ -1,0 +1,25 @@
+# Moving-target regression scenario with the field-identified two-band jitter
+# superimposed on the existing 5 m/s sine trajectory.
+motion_mode: preset_traj
+preset_traj_file: config/trajectory/preset_balloon_traj_sine_5ms.csv
+target_num: 1
+
+jitter_enabled: true
+jitter_seed: 260927
+# Each reset advances the phase seed, so loop trials cover different but
+# reproducible jitter phases instead of replaying one identical realization.
+jitter_seed_stride: 1
+jitter_low_rms_m: [0.10, 0.30, 0.19]
+jitter_low_frequencies_hz: [0.15, 0.26]
+jitter_high_rms_m: [0.015, 0.04, 0.04]
+jitter_high_frequencies_hz: [1.20, 3.70]
+
+trajectory_max_points: 12000
+trajectory_min_distance: 0.05
+
+balloons:
+  - id: 1
+    pos: [10.0, 0.0, 5.0]
+    vel: [0.0, 0.0, 0.0]
+
+interception_check_enabled: true

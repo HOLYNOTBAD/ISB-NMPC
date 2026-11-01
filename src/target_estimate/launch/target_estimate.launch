@@ -1,0 +1,42 @@
+<launch>
+  <arg name="target_param_file" default="$(find target_manager)/config/target.yaml" />
+  <arg name="p_image_input_topic" default="/tracker/bbox" />
+  <arg name="active_target_topic" default="/target_manager/active_target" />
+  <arg name="p_image_topic" default="/nmpc/p_image" />
+  <arg name="q_image_topic" default="/nmpc/q_image" />
+  <arg name="target_in_main_view_topic" default="/nmpc/target_in_main_view" />
+  <arg name="target_state_estimate_topic" default="/nmpc/targetStateEstimate" />
+  <arg name="p_target_topic" default="/nmpc/p_target" />
+  <arg name="publish_p_target" default="false" />
+  <arg name="uav_state_estimate_topic" default="/nmpc/uavStateEstimate" />
+  <arg name="balloon_intercepted_topic" default="/balloons/intercepted" />
+  <arg name="fsm_intercepted_topic" default="/fsm/intercepted" />
+  <arg name="image_frame_id" default="base_link" />
+  <arg name="target_frame_id" default="map" />
+  <arg name="max_target_pixel_error" default="80.0" />
+
+
+  <node pkg="target_estimate" type="target_estimate_cam"
+        name="target_estimate_cam" output="screen">
+    <rosparam command="load" file="$(arg target_param_file)" />
+    <param name="p_image/input_topic" value="$(arg p_image_input_topic)" />
+    <param name="masspoint/topic" value="$(arg active_target_topic)" />
+    <param name="p_image/topic" value="$(arg p_image_topic)" />
+    <param name="q_image/topic" value="$(arg q_image_topic)" />
+    <param name="target_in_main_view/topic"
+           value="$(arg target_in_main_view_topic)" />
+    <param name="target_state_estimate/topic"
+           value="$(arg target_state_estimate_topic)" />
+    <param name="p_target/topic" value="$(arg p_target_topic)" />
+    <param name="p_target/publish" value="$(arg publish_p_target)" />
+    <param name="uav_state_estimate/topic"
+           value="$(arg uav_state_estimate_topic)" />
+    <param name="balloon_intercepted/topic"
+           value="$(arg balloon_intercepted_topic)" />
+    <param name="fsm_intercepted/topic"
+           value="$(arg fsm_intercepted_topic)" />
+    <param name="image_frame_id" value="$(arg image_frame_id)" />
+    <param name="target_frame_id" value="$(arg target_frame_id)" />
+    <param name="max_target_pixel_error" value="$(arg max_target_pixel_error)" />
+  </node>
+</launch>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>interception_baseline</name>
+  <version>0.0.1</version>
+  <description>
+    Interception baseline package.
+    Contains Python reference implementations for interception guidance laws,
+    geometric controllers, and analysis tools for the SO3 NMPC pipeline.
+  </description>
+
+  <maintainer email="wsh@todo.todo">wsh</maintainer>
+
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>rospy</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>quadrotor_msgs</depend>
+  <depend>mavros_msgs</depend>
+  <depend>swarm_msgs</depend>
+
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-matplotlib</exec_depend>
+
+  <export>
+  </export>
+</package>

@@ -1,0 +1,71 @@
+fsm:
+  type: interception
+
+manager:
+  has_target_pos: false
+
+interception:
+  start_mode: ground_takeoff
+  offboard:
+    warmup_setpoints: 50
+    mode_request_interval: 1.0
+    arm_request_interval: 1.0
+  idle:
+    start_x: 0.0
+    start_y: 0.0
+    start_z: 30.0
+    vertical_speed: 2.0
+    horizontal_speed: 4.0
+    yaw_rate: 0.5
+    horizontal_kp: 1.5
+    horizontal_kd: 1.8
+    horizontal_ki: 0.0
+    horizontal_i_limit: 1.0
+    vertical_kp: 1.2
+    vertical_kd: 0.8
+    yaw_kp: 1.0
+    horizontal_accel: 1.5
+    vertical_accel: 1.0
+    velocity_bias_x: 0.0
+    velocity_bias_y: 0.0
+    position_tolerance: 0.3
+    frame_id: map
+  return_to_start:
+    # Each comparison trial must start at the same XYZ, including altitude.
+    restore_start_altitude: true
+  hold:
+    brake_speed_threshold: 0.3
+    brake_settle_time: 0.3
+    brake_timeout: 8.0
+  finish_hold:
+    brake_speed_threshold: 0.3
+    brake_settle_time: 0.3
+    brake_timeout: 8.0
+  local_frame:
+    # Spawn on the takeoff pad, then climb under PX4 control to the 30 m
+    # comparison altitude. Keep this as an absolute PX4-local height.
+    use_first_pose_as_origin: false
+    # Gazebo UAV state and 3-D target state share the fixed map axes.
+    rotate_by_initial_yaw: false
+  state_estimate:
+    topic: /nmpc/uavStateEstimate
+    fsm_state_topic: /fsm/fsm_state
+  target_state_estimate:
+    topic: /nmpc/targetStateEstimate
+    timeout: 0.5
+  exec:
+    motion_trigger_topic: /fsm/motion_trigger
+    intercepted_topic: /fsm/intercepted
+    nmpc_failure_topic: /nmpc/failure
+    detection_mode_topic: /target_detection/mode
+    terminal_lost_timeout: 0.05
+    terminal_mode_memory: 0.5
+    require_enter_confirmation: false
+    tracking_hold_enter_distance: 0.3
+    tracking_hold_exit_distance: 0.2
+    tracking_lost_distance: 0.5
+    tracking_lost_confirmation_sec: 0.15
+    tracking_max_hold_sec: 2.0
+    horizon_duration: 2.0
+    sample_dt: 0.1
+    horizon_points: 20

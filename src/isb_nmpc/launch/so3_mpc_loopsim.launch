@@ -1,0 +1,9 @@
+<launch>
+  <include file="$(find isb_nmpc)/launch/so3_mpc_bridge.launch">
+    <arg name="param_file" value="$(find isb_nmpc)/config/holydrone/real_flight/isb_nmpc_real_outdoor_10ms_30degree.yaml"/>
+    <arg name="has_target_pos" value="false"/>
+    <arg name="attitude_target_topic" value="/mavros/setpoint_raw/attitude"/>
+    <arg name="dry_run" value="$(optenv CONTROLLER_DRY_RUN false)"/>
+    <arg name="enable_log" value="$(optenv ENABLE_ISBNMPC_LOG false)"/>
+  </include>
+</launch>

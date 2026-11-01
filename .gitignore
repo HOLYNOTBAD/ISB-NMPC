@@ -1,0 +1,72 @@
+build/
+devel/
+bag
+!/_scripts/bag/
+!/_scripts/bag/**
+screen.txt
+.all_sh_ttys
+.catkin_workspace
+src/CMakeLists.txt
+doxygen/
+*.pyc
+third_party/
+.vscode/
+rosbag/all*
+.codex
+.agents
+.clangd
+.claude
+rosbag/
+misc/rosbag/
+.catkin_tools/
+compile_commands.json
+src/jsk_visualization
+src/jsk_rviz_plugins
+src/params/gazebo/worlds/baylands_rviz_cache/
+
+# YOLO 中间生成物
+src/yolo/weights/_work/
+src/yolo/weights/_scripts/__pycache__/
+src/yolo/**/__pycache__/
+src/yolo/**/*.pyc
+src/yolo/**/*.pyo
+src/yolo/**/*.so
+src/yolo/**/*.o
+src/yolo/**/build/
+*.onnx
+*.engine
+!src/yolo/weights/*.engine
+*.pt
+*.wts
+!src/yolo/weights/weights/best_640x480.wts
+Eigen/
+COMMENT_STYLE.md
+# Ignore runtime logs and Gazebo/PX4 SITL logs
+*.bag
+*.bag.active
+*.log
+/logs/
+log/
+log/**
+log/gazebo_sitl/
+log/gazebo_sitl/**
+# Runtime result directories at any depth
+result/
+results/
+
+# Generated experiment outputs stay local; curated raw datasets are versioned.
+/expData/
+!/rawData/
+!/rawData/**
+
+# Local Python caches, editor backups, and launcher state
+__pycache__/
+*.pyo
+*.bak
+*.swp
+.DS_Store
+.interception_terminal_env
+
+# External Gazebo terrain assets
+/src/params/gazebo/models/baylands/media
+/install/

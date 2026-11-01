@@ -1,0 +1,8 @@
+<launch>
+  <arg name="window_s" default="10.0"/>
+
+  <node pkg="dc_s2ekf" type="evaluate_delay_comp_truth_live.py"
+        name="live_filter_evaluation" output="screen">
+    <param name="window_s" value="$(arg window_s)"/>
+  </node>
+</launch>

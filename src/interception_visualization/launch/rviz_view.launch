@@ -1,0 +1,163 @@
+<launch>
+
+  <arg name="config_path" default="$(find interception_visualization)/rviz/interception.rviz"/>
+  <arg name="show_fpv_los_overlay" default="true"/>
+  <arg name="fpv_los_input_topic" default="/target_detection/fpv_source"/>
+  <arg name="fpv_raw_image_topic" default="/camera/image_raw"/>
+  <arg name="fpv_compressed_image_topic" default=""/>
+  <arg name="fpv_los_output_topic" default="/camera/fpv_debug"/>
+  <arg name="fpv_hud_environment" default="auto"/>
+  <arg name="fpv_replay_mode" default="false"/>
+  <arg name="fpv_initial_detection_mode" default="--"/>
+  <arg name="fpv_draw_virtual_balloon" default="false"/>
+  <arg name="fpv_max_output_rate_hz" default="0.0"/>
+  <arg name="fpv_output_width" default="640"/>
+  <arg name="fpv_output_height" default="480"/>
+  <arg name="fpv_los_bbox_topic" default="/tracker/bbox"/>
+  <arg name="fpv_yolo_bbox_topic" default="/tracker/bbox_raw"/>
+  <arg name="fpv_roi_prediction_topic" default="/tracker/bbox_roi_prediction"/>
+  <arg name="fpv_roi_prediction_timeout" default="0.15"/>
+  <arg name="fpv_los_q_image_topic" default="/nmpc/q_image"/>
+  <arg name="fpv_ekf_trail_duration" default="0.5"/>
+  <arg name="fpv_ekf_trail_max_points" default="30"/>
+  <arg name="fpv_odometry_topic" default="/nmpc/uavStateEstimate"/>
+  <arg name="fpv_detection_mode_topic" default="/target_detection/mode"/>
+  <arg name="fpv_detection_roi_topic" default="/target_detection/roi"/>
+  <arg name="fpv_fsm_state_topic" default="/fsm/fsm_state"/>
+  <arg name="fpv_mpc_latency_topic" default="/isb_nmpc/solve_latency_ms"/>
+  <arg name="active_global_traj_topic" default="/planning/active_global_traj_vis"/>
+  <arg name="active_horizon_traj_topic" default="/planning/active_horizon_traj_vis"/>
+  <arg name="uav_state_display_topic" default="/nmpc/uavStateEstimate"/>
+  <arg name="show_fpv_telemetry_hud" default="true"/>
+  <arg name="show_uav_mesh" default="true"/>
+  <arg name="uav_mesh_state_topic" default="/nmpc/uavStateEstimate"/>
+  <arg name="uav_mesh_marker_topic" default="/rviz/uav_mesh"/>
+  <arg name="uav_mesh_resource" default="package://holydrone/gazebo/models/holydrone/meshes/holydrone_v1.STL"/>
+  <arg name="uav_mesh_scale" default="0.01"/>
+  <arg name="uav_mesh_roll" default="0.0"/>
+  <arg name="uav_mesh_pitch" default="0.0"/>
+  <arg name="uav_mesh_yaw" default="0.0"/>
+  <arg name="uav_mesh_gazebo_model_states_topic" default=""/>
+  <arg name="uav_mesh_gazebo_model_name" default="holydrone"/>
+  <arg name="show_camera_frustum" default="false"/>
+  <arg name="camera_frustum_marker_topic" default="/rviz/camera_frustum"/>
+  <arg name="camera_frustum_depth" default="8.0"/>
+  <arg name="camera_frustum_line_width" default="0.04"/>
+  <arg name="align_world_map_from_gazebo" default="false"/>
+  <arg name="show_baylands_mesh" default="true"/>
+  <arg name="baylands_mesh_marker_topic" default="/rviz/baylands_mesh"/>
+  <arg name="baylands_model_dir" default="$(find holydrone)/gazebo/models/holydrone_baylands"/>
+  <arg name="baylands_rviz_cache_dir" default="/tmp/holydrone_baylands_rviz"/>
+  <arg name="baylands_gazebo_model_states_topic" default=""/>
+  <arg name="baylands_gazebo_model_name" default="baylands"/>
+  <arg name="baylands_origin_x" default="0.0"/>
+  <arg name="baylands_origin_y" default="0.0"/>
+  <!-- Fallback used without Gazebo; simulation reads the authoritative model pose. -->
+  <arg name="baylands_origin_z" default="-1.3"/>
+  <arg name="baylands_origin_roll" default="0.0"/>
+  <arg name="baylands_origin_pitch" default="0.0"/>
+  <arg name="baylands_origin_yaw" default="0.0"/>
+
+  <node unless="$(arg align_world_map_from_gazebo)"
+    pkg="tf" type="static_transform_publisher" name="world_to_map_tf"
+    args="0 0 0 0 0 0 world map 100"/>
+
+  <node if="$(arg align_world_map_from_gazebo)"
+    pkg="interception_visualization" type="world_map_alignment_tf.py"
+    name="world_map_alignment_tf" output="log">
+    <param name="model_states_topic" value="/gazebo/model_states"/>
+    <param name="uav_state_topic" value="$(arg uav_state_display_topic)"/>
+    <param name="model_name" value="$(arg uav_mesh_gazebo_model_name)"/>
+    <param name="world_frame" value="world"/>
+    <param name="map_frame" value="map"/>
+  </node>
+
+  <node if="$(arg show_fpv_los_overlay)"
+    pkg="interception_visualization"
+    type="fpv_los_overlay.py"
+    name="fpv_los_overlay"
+    output="log">
+    <rosparam command="load" file="$(find interception_visualization)/rviz/fpv_debug.yaml"/>
+    <param name="image_topic" value="$(arg fpv_los_input_topic)"/>
+    <param name="raw_image_topic" value="$(arg fpv_raw_image_topic)"/>
+    <param name="compressed_image_topic" value="$(arg fpv_compressed_image_topic)"/>
+    <param name="output_topic" value="$(arg fpv_los_output_topic)"/>
+    <param name="hud_environment" value="$(arg fpv_hud_environment)"/>
+    <param name="replay_mode" value="$(arg fpv_replay_mode)"/>
+    <param name="initial_detection_mode" value="$(arg fpv_initial_detection_mode)"/>
+    <param name="draw_virtual_balloon" value="$(arg fpv_draw_virtual_balloon)"/>
+    <param name="max_output_rate_hz" value="$(arg fpv_max_output_rate_hz)"/>
+    <param name="output_width" value="$(arg fpv_output_width)"/>
+    <param name="output_height" value="$(arg fpv_output_height)"/>
+    <param name="bbox_topic" value="$(arg fpv_los_bbox_topic)"/>
+    <param name="yolo_bbox_topic" value="$(arg fpv_yolo_bbox_topic)"/>
+    <param name="roi_prediction_topic" value="$(arg fpv_roi_prediction_topic)"/>
+    <param name="roi_prediction_timeout" value="$(arg fpv_roi_prediction_timeout)"/>
+    <param name="q_image_topic" value="$(arg fpv_los_q_image_topic)"/>
+    <param name="ekf_trail_duration" value="$(arg fpv_ekf_trail_duration)"/>
+    <param name="ekf_trail_max_points" value="$(arg fpv_ekf_trail_max_points)"/>
+    <param name="odometry_topic" value="$(arg fpv_odometry_topic)"/>
+    <param name="detection_mode_topic" value="$(arg fpv_detection_mode_topic)"/>
+    <param name="roi_topic" value="$(arg fpv_detection_roi_topic)"/>
+    <param name="fsm_state_topic" value="$(arg fpv_fsm_state_topic)"/>
+    <param name="mpc_latency_topic" value="$(arg fpv_mpc_latency_topic)"/>
+    <param name="show_telemetry_hud" value="$(arg show_fpv_telemetry_hud)"/>
+  </node>
+
+  <node if="$(arg show_uav_mesh)"
+    pkg="interception_visualization"
+    type="uav_mesh_marker.py"
+    name="uav_mesh_marker"
+    output="log">
+    <param name="state_topic" value="$(arg uav_mesh_state_topic)"/>
+    <param name="marker_topic" value="$(arg uav_mesh_marker_topic)"/>
+    <param name="mesh_resource" value="$(arg uav_mesh_resource)"/>
+    <param name="scale" value="$(arg uav_mesh_scale)"/>
+    <param name="mesh_roll" value="$(arg uav_mesh_roll)"/>
+    <param name="mesh_pitch" value="$(arg uav_mesh_pitch)"/>
+    <param name="mesh_yaw" value="$(arg uav_mesh_yaw)"/>
+    <param name="gazebo_model_states_topic" value="$(arg uav_mesh_gazebo_model_states_topic)"/>
+    <param name="gazebo_model_name" value="$(arg uav_mesh_gazebo_model_name)"/>
+  </node>
+
+  <node if="$(arg show_camera_frustum)"
+    pkg="interception_visualization"
+    type="camera_frustum_marker.py"
+    name="camera_frustum_marker"
+    output="log">
+    <param name="state_topic" value="$(arg uav_mesh_state_topic)"/>
+    <param name="marker_topic" value="$(arg camera_frustum_marker_topic)"/>
+    <param name="depth" value="$(arg camera_frustum_depth)"/>
+    <param name="line_width" value="$(arg camera_frustum_line_width)"/>
+    <param name="gazebo_model_states_topic" value="$(arg uav_mesh_gazebo_model_states_topic)"/>
+    <param name="gazebo_model_name" value="$(arg uav_mesh_gazebo_model_name)"/>
+  </node>
+
+  <node if="$(arg show_baylands_mesh)"
+    pkg="interception_visualization"
+    type="baylands_mesh_marker.py"
+    name="baylands_mesh_marker"
+    output="log">
+    <param name="marker_topic" value="$(arg baylands_mesh_marker_topic)"/>
+    <param name="model_dir" value="$(arg baylands_model_dir)"/>
+    <param name="cache_dir" value="$(arg baylands_rviz_cache_dir)"/>
+    <param name="frame_id" value="world"/>
+    <param name="gazebo_model_states_topic" value="$(arg baylands_gazebo_model_states_topic)"/>
+    <param name="gazebo_model_name" value="$(arg baylands_gazebo_model_name)"/>
+    <param name="origin_x" value="$(arg baylands_origin_x)"/>
+    <param name="origin_y" value="$(arg baylands_origin_y)"/>
+    <param name="origin_z" value="$(arg baylands_origin_z)"/>
+    <param name="origin_roll" value="$(arg baylands_origin_roll)"/>
+    <param name="origin_pitch" value="$(arg baylands_origin_pitch)"/>
+    <param name="origin_yaw" value="$(arg baylands_origin_yaw)"/>
+  </node>
+
+  <node pkg="rviz" name="rviz" type="rviz" output="log"
+    args="-d $(arg config_path)">
+    <!-- Allow a shared RViz config to visualize FSM-specific topic namespaces. -->
+    <remap from="/planning/active_global_traj_vis" to="$(arg active_global_traj_topic)"/>
+    <remap from="/planning/active_horizon_traj_vis" to="$(arg active_horizon_traj_topic)"/>
+    <remap from="/nmpc/uavStateEstimate" to="$(arg uav_state_display_topic)"/>
+  </node>
+
+</launch>

@@ -1,0 +1,44 @@
+<launch>
+  <arg name="controllers" default="isb_nmpc,backstepping,pslos,rotate_highspeed_attack"/>
+  <arg name="count" default="30"/>
+  <arg name="timeout" default="100.0"/>
+  <arg name="ready_timeout" default="180.0"/>
+  <arg name="service_timeout" default="120.0"/>
+  <arg name="source_motion_file" default="$(find target_register)/config/balloon_motion/balloon_motion_random_walk_radius_1m.yaml"/>
+  <arg name="motion_file" default="$(env HOME)/.ros/loop_comparison/active_motion.yaml"/>
+  <arg name="output_dir" default="$(env HOME)/.ros/loop_comparison/results"/>
+  <arg name="trajectory_seed" default="1000"/>
+  <arg name="balloon_radius" default="1.0"/>
+  <arg name="sample_rate" default="30.0"/>
+  <arg name="truth_max_age" default="0.2"/>
+  <arg name="los_hold_time" default="0.3"/>
+  <arg name="target_lost_grace" default="1.0"/>
+  <arg name="trajectory_hold_time" default="3.0"/>
+  <arg name="trajectory_publish_rate" default="2.0"/>
+  <arg name="start_tolerance" default="0.5"/>
+  <arg name="target_start_tolerance" default="0.25"/>
+  <arg name="start_speed_tolerance" default="0.7"/>
+  <arg name="start_yaw_tolerance" default="0.35"/>
+  <arg name="start_attitude_tolerance" default="0.2"/>
+  <arg name="start_angular_speed_tolerance" default="0.5"/>
+  <arg name="isb_nmpc_param_file" default="$(find isb_nmpc)/config/holydrone/simulation/isb_nmpc_sim_outdoor_15ms_30degree_aggressive.yaml"/>
+  <arg name="baseline_param_file" default="$(find interception_baseline)/config/comparison.yaml"/>
+  <!-- The scheduler owns controller processes: never start a second controller alongside it. -->
+  <node pkg="loop_comparison" type="loop_comparison_node.py" name="loop_comparison" output="screen"
+        args="--controllers $(arg controllers) --manage-controllers
+              --count $(arg count) --timeout $(arg timeout)
+              --ready-timeout $(arg ready_timeout) --service-timeout $(arg service_timeout)
+              --source-motion-file &quot;$(arg source_motion_file)&quot;
+              --motion-file &quot;$(arg motion_file)&quot; --output-dir &quot;$(arg output_dir)&quot;
+              --trajectory-seed $(arg trajectory_seed) --balloon-radius $(arg balloon_radius)
+              --sample-rate $(arg sample_rate) --truth-max-age $(arg truth_max_age)
+              --los-hold-time $(arg los_hold_time) --target-lost-grace $(arg target_lost_grace)
+              --trajectory-hold-time $(arg trajectory_hold_time)
+              --trajectory-publish-rate $(arg trajectory_publish_rate)
+              --start-tolerance $(arg start_tolerance) --target-start-tolerance $(arg target_start_tolerance)
+              --start-speed-tolerance $(arg start_speed_tolerance) --start-yaw-tolerance $(arg start_yaw_tolerance)
+              --start-attitude-tolerance $(arg start_attitude_tolerance)
+              --start-angular-speed-tolerance $(arg start_angular_speed_tolerance)
+              --isb_nmpc-param-file &quot;$(arg isb_nmpc_param_file)&quot;
+              --baseline-param-file &quot;$(arg baseline_param_file)&quot;"/>
+</launch>

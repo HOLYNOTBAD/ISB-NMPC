@@ -1,0 +1,22 @@
+<launch>
+  <arg name="count" default="$(optenv LOOP_COUNT 10)" />
+  <arg name="timeout" default="$(optenv LOOP_TIMEOUT 55.0)" />
+  <arg name="ready_timeout" default="180.0" />
+  <arg name="service_timeout" default="120.0" />
+  <arg name="controller" default="isb_nmpc" />
+  <arg name="output_dir" default="$(optenv LOOP_OUTPUT_DIR /tmp/loop_interception)" />
+  <arg name="sample_rate" default="30.0" />
+  <arg name="truth_max_age" default="0.2" />
+  <arg name="write_results" default="$(optenv ENABLE_LOOP_RESULTS 0)" />
+  <node pkg="loop_simulation" type="loop_simulation_node.py"
+        name="loop_simulation" output="screen"
+        args="--count $(arg count)
+              --timeout $(arg timeout)
+              --ready-timeout $(arg ready_timeout)
+              --service-timeout $(arg service_timeout)
+              --controller $(arg controller)
+              --output-dir $(arg output_dir)
+              --sample-rate $(arg sample_rate)
+              --truth-max-age $(arg truth_max_age)
+              --write-results $(arg write_results)" />
+</launch>

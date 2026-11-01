@@ -1,0 +1,16 @@
+<launch>
+  <arg name="engine_file"
+       default="$(find yolo)/weights/balloon_640x480_orinnx.engine"/>
+  <arg name="output_bbox_topic"
+       default="$(optenv DETECTION_OUTPUT_BBOX_TOPIC /tracker/bbox_raw)"/>
+
+  <include file="$(find target_detection_yolo)/launch/target_detection_yolo_common.launch">
+    <arg name="config_file" value="$(find target_detection_yolo)/config/detection_fsm.yaml"/>
+    <arg name="engine_file" value="$(arg engine_file)"/>
+    <arg name="input_image_topic" value="/camera/image_raw"/>
+    <arg name="output_bbox_topic" value="$(arg output_bbox_topic)"/>
+    <arg name="mode_topic" value="/target_detection/mode"/>
+    <arg name="debug_image_topic" value="/target_detection/fpv_source"/>
+    <arg name="debug_image_rate_hz" value="30.0"/>
+  </include>
+</launch>

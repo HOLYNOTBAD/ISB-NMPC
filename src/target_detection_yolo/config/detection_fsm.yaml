@@ -1,0 +1,47 @@
+detector_confidence_threshold: 0.30
+detector_nms_threshold: 0.30
+
+scale_switch:
+  downscale_factor: 4.05
+  reacquire_min_confidence: 0.55
+  reacquire_consecutive_detections: 2
+  hr_lost_confidence: 0.35
+  hr_lost_consecutive_failures: 3
+  lr_enter_min_target_size_px: 20.0
+  lr_enter_min_confidence: 0.55
+  lr_enter_consecutive_detections: 3
+  lr_exit_target_size_px: 14.0
+  lr_exit_confidence: 0.35
+  lr_exit_consecutive_failures: 2
+
+association:
+  # IoU 和归一化中心距离满足任意一项即可参与关联；已知类别必须一致。
+  min_iou: 0.05
+  max_center_distance_factor: 3.0
+
+strategies:
+  reacquire_hr:
+    tile_width: 640
+    tile_height: 480
+    overlap_ratio: 0.20
+    min_confidence: 0.0
+    confirmation_min_confidence: 0.55
+
+  track_hr:
+    roi_width: 640
+    roi_height: 480
+    min_confidence: 0.0
+    prediction_association_radius_px: 360.0
+    # Select/interpolate an ROI from the absolute-time S2/IMU prediction
+    # sequence using the image acquisition stamp.
+    use_ekf_prediction: true
+    ekf_prediction_topic: /tracker/bbox_roi_prediction_sequence
+    ekf_prediction_timeout_s: 0.50
+    # Camera delivery/inference can make the newest sequence start after the
+    # image acquisition stamp. Retain older sequences and select the newest
+    # one whose absolute-time interval actually covers that image.
+    ekf_prediction_history_s: 0.50
+    ekf_prediction_max_sequences: 32
+
+  track_lr:
+    min_confidence: 0.0

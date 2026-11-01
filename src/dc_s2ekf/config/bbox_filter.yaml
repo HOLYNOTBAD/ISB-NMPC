@@ -1,0 +1,111 @@
+# =============================================================================
+# 1. ROS I/O and fixed-rate publication
+# =============================================================================
+# Bbox arrivals update the historical state; buffered IMU increments replay it
+# to now. output_rate_hz controls propagation/publication, not YOLO rate.
+# The detector publishes bounding boxes in the native 2592x1944 image
+# coordinates. Keep this camera model in that same coordinate system; using
+# the old 640x480 model clips every HR detection and corrupts LOS/ROI feedback.
+# This file contains filter parameters only. The camera model is loaded from
+# the selected camera profile under /camera.
+input_topic: /tracker/bbox_raw
+output_topic: /tracker/bbox
+roi_prediction_topic: /tracker/bbox_roi_prediction
+roi_prediction_sequence_topic: /tracker/bbox_roi_prediction_sequence
+pose_topic: /mavros/local_position/pose
+imu_topic: /mavros/imu/data
+output_rate_hz: 50.0
+# Camera intrinsics and rotation are read from the shared /camera namespace
+# loaded from the selected camera YAML.
+
+# =============================================================================
+# 2. Future ROI prediction consumed by target_detection_yolo
+# =============================================================================
+# Predict through one detector cycle plus image/inference latency. The message
+# header carries this future target time; unhealthy/resetting S2 states publish
+# an empty prediction so TRACK_HR immediately falls back to the raw box.
+roi_prediction_horizon_s: 0.08
+# Absolute-time samples used by target_detection_yolo. The legacy single prediction
+# above remains available for visualization and compatibility.
+roi_prediction_sequence_horizon_s: 0.60
+roi_prediction_sequence_step_s: 0.005
+roi_prediction_max_detection_age_s: 0.10
+
+# =============================================================================
+# 3. Sensor timestamps, attitude history, and IMU health
+# =============================================================================
+# The camera/IMU time offset is loaded from /camera/time_offset in the active
+# camera profile. A private ~cam_imu_time_offset_s parameter may override it
+# for experiments. The selected offset is added to the camera timestamp.
+use_image_stamp: true
+fallback_delay_s: 0.045
+max_delay_s: 0.22
+attitude_buffer_s: 1.0
+max_attitude_age_s: 0.25
+max_input_stamp_skew_s: 5.0
+# PX4/MAVROS SITL can retain Unix-epoch header stamps while Gazebo nodes use
+# /clock. In that mixed-clock case, keep the attitude sample and timestamp it
+# at ROS receipt time. Normal real-flight stamps within the skew limit are
+# preserved unchanged.
+use_receive_time_on_stamp_skew: true
+s2_max_imu_age_s: 0.08
+
+# =============================================================================
+# 4. Prediction horizon, reset, and detector dropout
+# =============================================================================
+max_predict_ahead_s: 0.22
+max_update_dt_s: 0.20
+reset_after_gap_s: 0.35
+# Limit prediction-only tracking after detection loss to 0.20 s.
+# FSM visual-loss grace remains 0.30 s (about 0.50 s total before HOLD).
+max_coast_s: 0.20
+coast_probability_decay_s: 0.50
+# Predicted boxes remain eligible for TRACK_HR during the short visual coast.
+# This is deliberately above hr_lost_confidence (0.35); the coast timeout,
+# rather than an artificial confidence decay, ends the prediction window.
+coast_probability_floor: 0.36
+
+# =============================================================================
+# 5. Adaptive visual-measurement quality
+# =============================================================================
+# Quality continuously scales measurement trust; it is not a hard rejection
+# gate. The minimum weight prevents the filter from ignoring a valid bbox.
+measurement_quality_min_weight: 0.25
+quality_reference_area_px2: 26244.0
+quality_edge_margin_px: 113.4
+quality_edge_min_weight: 0.55
+quality_jump_rate_start_px_s: 1012.5
+quality_jump_rate_full_px_s: 3645.0
+
+# =============================================================================
+# 6. Pixel measurement and bbox-size noise
+# =============================================================================
+measurement_std_px: 3.0
+size_measurement_std_px: 20.25
+min_box_size_px: 8.1
+
+# =============================================================================
+# 7. S2 measurement, initialization, and innovation gates
+# =============================================================================
+sigma_bearing_meas_rad: 0.006
+# S2 CV-EKF covariance model.
+s2_initial_bearing_std_rad: 0.20
+s2_initial_omega_std_rad_s: 0.5
+
+# =============================================================================
+# 8. IMU-controlled S2 prediction and residual-motion process model
+# =============================================================================
+# Camera attitude increments are known prediction inputs. This term models
+# their angular-rate uncertainty; the process-acceleration term only models
+# residual LOS motion after camera rotation has been removed.
+s2_gyro_noise_std_rad_s: 0.01
+s2_process_accel_std_rad_s2: 0.8
+
+# =============================================================================
+# 9. Projection limit and operational logging
+# =============================================================================
+min_project_z: 0.05
+
+min_confidence_for_bearing: 0.01
+log_status: true
+log_period_s: 2.0

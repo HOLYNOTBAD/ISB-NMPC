@@ -1,0 +1,13 @@
+<launch>
+  <include file="$(find interception_visualization)/launch/rviz_view.launch">
+    <arg name="config_path" value="$(find interception_visualization)/rviz/loop_comparison.rviz"/>
+    <arg name="show_fpv_los_overlay" value="false"/>
+    <arg name="show_fpv_telemetry_hud" value="false"/>
+    <arg name="show_camera_frustum" value="true"/>
+    <arg name="uav_mesh_gazebo_model_states_topic" value="/gazebo/model_states"/>
+    <arg name="uav_mesh_gazebo_model_name" value="holydrone"/>
+    <arg name="baylands_model_dir" value="$(find holydrone)/gazebo/models/holydrone_baylands"/>
+    <arg name="baylands_gazebo_model_states_topic" value="/gazebo/model_states"/>
+    <arg name="align_world_map_from_gazebo" value="true"/>
+  </include>
+</launch>

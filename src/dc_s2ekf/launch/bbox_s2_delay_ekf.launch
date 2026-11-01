@@ -1,0 +1,18 @@
+<launch>
+  <arg name="config_file" default="$(find dc_s2ekf)/config/bbox_filter.yaml" />
+  <arg name="input_topic" default="/tracker/bbox_raw" />
+  <arg name="output_topic" default="/tracker/bbox" />
+  <arg name="output_rate_hz" default="50.0" />
+  <arg name="pose_topic" default="/mavros/local_position/pose" />
+  <arg name="imu_topic" default="/mavros/imu/data" />
+
+
+  <node name="bbox_s2_delay_ekf" pkg="dc_s2ekf" type="bbox_s2_delay_ekf_node" output="screen">
+    <rosparam command="load" file="$(arg config_file)" />
+    <param name="input_topic" value="$(arg input_topic)" />
+    <param name="output_topic" value="$(arg output_topic)" />
+    <param name="output_rate_hz" value="$(arg output_rate_hz)" />
+    <param name="pose_topic" value="$(arg pose_topic)" />
+    <param name="imu_topic" value="$(arg imu_topic)" />
+  </node>
+</launch>

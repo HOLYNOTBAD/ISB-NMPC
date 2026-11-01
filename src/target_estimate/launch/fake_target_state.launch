@@ -1,0 +1,15 @@
+<launch>
+  <arg name="truth_topic" default="/balloons/masspoint" />
+  <arg name="output_topic" default="/nmpc/targetStateEstimate" />
+  <arg name="frame_id" default="world" />
+  <!-- -1 selects the first balloon in each truth message. -->
+  <arg name="target_id" default="-1" />
+
+  <node pkg="target_estimate" type="fake_target_state"
+        name="fake_target_state" output="screen">
+    <param name="truth_topic" value="$(arg truth_topic)" />
+    <param name="output_topic" value="$(arg output_topic)" />
+    <param name="frame_id" value="$(arg frame_id)" />
+    <param name="target_id" value="$(arg target_id)" />
+  </node>
+</launch>

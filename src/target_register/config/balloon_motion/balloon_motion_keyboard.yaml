@@ -1,0 +1,27 @@
+motion_mode: keyboard
+target_num: 1
+keyboard_acceleration: 3.0
+keyboard_max_speed: 10.0
+keyboard_key_timeout_sec: 0.25
+
+# Two-band target motion identified from six 2026-09-27 real-flight detection
+# logs after compensating UAV attitude. RMS axes are [forward, right, up] in
+# the spawn-relative frame. At the configured 40 m range, right/up values
+# reproduce about 0.42/0.27 deg low-frequency and 0.055/0.060 deg high-frequency
+# line-of-sight motion.
+jitter_enabled: true
+jitter_seed: 260927
+jitter_low_rms_m: [0.10, 0.30, 0.19]
+jitter_low_frequencies_hz: [0.15, 0.26]
+jitter_high_rms_m: [0.015, 0.04, 0.04]
+jitter_high_frequencies_hz: [1.20, 3.70]
+
+trajectory_max_points: 12000
+trajectory_min_distance: 0.05
+
+balloons:
+  - id: 1
+    pos: [40.0, 0.0, 4.0]
+    vel: [0.0, 0.0, 0.0]
+
+interception_check_enabled: true

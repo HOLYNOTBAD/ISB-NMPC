@@ -1,0 +1,28 @@
+<launch>
+  <arg name="param_file" default="$(find target_manager)/config/target.yaml" />
+  <arg name="raw_masspoint_topic" default="/balloons/masspoint" />
+  <arg name="uav_state_estimate_topic" default="/nmpc/uavStateEstimate" />
+  <arg name="attack_sequence_topic" default="/target_manager/attack_sequence" />
+  <arg name="active_target_topic" default="/target_manager/active_target" />
+  <arg name="p_target_topic" default="/nmpc/p_target" />
+  <arg name="interception_event_topic" default="/balloons/event" />
+  <arg name="fsm_state_topic" default="/fsm/fsm_state" />
+  <arg name="publish_rate" default="10.0" />
+  <arg name="mav_vel" default="14.0" />
+  <arg name="max_exact_targets" default="8" />
+
+  <node pkg="target_manager" type="target_manager"
+        name="target_manager" output="screen">
+    <rosparam command="load" file="$(arg param_file)" />
+    <param name="masspoint_topic" value="$(arg raw_masspoint_topic)" />
+    <param name="uav_state_topic" value="$(arg uav_state_estimate_topic)" />
+    <param name="attack_sequence_topic" value="$(arg attack_sequence_topic)" />
+    <param name="active_target_topic" value="$(arg active_target_topic)" />
+    <param name="p_target_topic" value="$(arg p_target_topic)" />
+    <param name="interception_event_topic" value="$(arg interception_event_topic)" />
+    <param name="fsm_state_topic" value="$(arg fsm_state_topic)" />
+    <param name="publish_rate" value="$(arg publish_rate)" />
+    <param name="mav_vel" value="$(arg mav_vel)" />
+    <param name="max_exact_targets" value="$(arg max_exact_targets)" />
+  </node>
+</launch>

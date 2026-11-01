@@ -1,0 +1,16 @@
+<launch>
+  <include file="$(find interception_visualization)/launch/rviz_view.launch">
+    <arg name="config_path" value="$(find interception_visualization)/rviz/interception_no_tpv.rviz"/>
+    <arg name="fpv_los_input_topic" value="/target_detection/fpv_source"/>
+    <arg name="fpv_yolo_bbox_topic" value="$(optenv DETECTION_OUTPUT_BBOX_TOPIC /tracker/bbox_raw)"/>
+    <arg name="uav_mesh_resource" value="package://holydrone/gazebo/models/holydrone/meshes/holydrone_v1.STL"/>
+    <arg name="uav_mesh_gazebo_model_states_topic" value="/gazebo/model_states"/>
+    <arg name="uav_mesh_gazebo_model_name" value="holydrone"/>
+    <arg name="show_camera_frustum" value="true"/>
+    <arg name="baylands_model_dir" value="$(find holydrone)/gazebo/models/holydrone_baylands"/>
+    <arg name="baylands_rviz_cache_dir" value="/tmp/holydrone_baylands_rviz"/>
+    <arg name="baylands_gazebo_model_states_topic" value="/gazebo/model_states"/>
+    <arg name="baylands_gazebo_model_name" value="baylands"/>
+    <arg name="align_world_map_from_gazebo" value="true"/>
+  </include>
+</launch>

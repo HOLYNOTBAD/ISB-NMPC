@@ -1,0 +1,19 @@
+manager:
+  # true: use 3-D masspoints for target sorting and active-target selection.
+  # false: keep target_manager alive but bypass its 3-D target output.
+  has_target_pos: false
+
+estimator:
+  # Bearing-estimator association and visibility policy.
+  q_image_timeout: 0.3
+  require_target_in_view: true
+  confirmation_frames: 3
+  max_tracking_jump_px: 80.0
+  max_tracking_jump_rate_px_s: 4000.0
+  pending_match_px: 30.0
+  lock_timeout: 0.5
+
+local_frame:
+  # Enable only when incoming target positions use an absolute external frame.
+  use_origin_topic: false
+  origin_topic: /local_frame/origin

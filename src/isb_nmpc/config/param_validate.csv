@@ -1,0 +1,16 @@
+参数文件,参数环境,控制周期,相机角度,仿真验证,实飞验证,最近验证日期,验证人员,代码版本或提交,日志路径,备注
+holydrone/real_flight/isb_nmpc_real_indoor_5ms_0degree.yaml,实机室内,5ms,0degree,未验证,未验证,,,,,
+holydrone/real_flight/isb_nmpc_real_indoor_5ms_30degree.yaml,实机室内,5ms,30degree,未验证,未验证,,,,,
+holydrone/real_flight/isb_nmpc_real_outdoor_5ms_0degree.yaml,实机室外,5ms,0degree,未验证,未验证,,,,,
+holydrone/real_flight/isb_nmpc_real_outdoor_5ms_30degree.yaml,实机室外,5ms,30degree,未验证,未验证,,,,,
+holydrone/real_flight/isb_nmpc_real_outdoor_8ms_0degree.yaml,实机室外,8ms,0degree,未验证,未验证,,,,,
+holydrone/real_flight/isb_nmpc_real_outdoor_8ms_30degree.yaml,实机室外,8ms,30degree,未验证,未验证,,,,,
+holydrone/real_flight/isb_nmpc_real_outdoor_10ms_30degree.yaml,实机室外,10ms,30degree,未验证,未验证,,,,,
+holydrone/real_flight/isb_nmpc_real_outdoor_15ms_30degree.yaml,实机室外,15ms,30degree,未验证,未验证,,,,,
+holydrone/real_flight/isb_nmpc_real_outdoor_20ms_30degree.yaml,实机室外,20ms,30degree,未验证,未验证,,,,,
+holydrone/simulation/isb_nmpc_sim_outdoor_5ms_0degree.yaml,仿真室外,5ms,0degree,未验证,不适用,,,,,
+holydrone/simulation/isb_nmpc_sim_outdoor_5ms_30degree.yaml,仿真室外,5ms,30degree,未验证,不适用,,,,,
+holydrone/simulation/isb_nmpc_sim_outdoor_10ms_0degree.yaml,仿真室外,10ms,0degree,通过,不适用,2026-07-15,,,,用户确认仿真验证成功
+holydrone/simulation/isb_nmpc_sim_outdoor_10ms_30degree.yaml,仿真室外,10ms,30degree,未验证,不适用,,,,,
+holydrone/simulation/isb_nmpc_sim_outdoor_20ms_0degree.yaml,仿真室外,20ms,0degree,未验证,不适用,,,,,
+holydrone/simulation/isb_nmpc_sim_outdoor_20ms_30degree.yaml,仿真室外,20ms,30degree,未验证,不适用,,,,,

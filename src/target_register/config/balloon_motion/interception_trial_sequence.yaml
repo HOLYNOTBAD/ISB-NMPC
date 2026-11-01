@@ -1,0 +1,4 @@
+sequence_policy: stop
+
+trials:
+  - config: config/balloon_motion/balloon_motion_velocity_20ms_back.yaml

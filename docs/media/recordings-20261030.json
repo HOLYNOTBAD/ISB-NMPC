@@ -1,0 +1,288 @@
+{
+  "source_presentation": "ISB-NMPC-full_v2.pptx",
+  "source_presentation_sha256": "daaef8050c48d5667e9e3667d2f40c0307e346415c9ee9bb8c0eba142a732b3f",
+  "assets": [
+    {
+      "file": "comparison-isb-nmpc.mp4",
+      "slide": 10,
+      "shape_name": "ISB-NMPC_10x_count",
+      "pptx_member": "ppt/media/media14.mp4",
+      "source_sha256": "bcb9d918d734d9ccaa80d57305f75514abb8ce1e25c962c14db72b0a7291916a",
+      "processing": {
+        "full_embedded_clip": true,
+        "additional_speed_factor": 1,
+        "audio": "removed",
+        "video": "H.264 CRF24, width1280, yuv420p, faststart"
+      },
+      "output_sha256": "947052abd17e63991e43cef55b30c6852be4aa18d8f81e5a685c0d92eee2b904",
+      "output": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1280,
+            "height": 684,
+            "avg_frame_rate": "45/1"
+          }
+        ],
+        "format": {
+          "duration": "14.600000",
+          "size": "481074"
+        }
+      },
+      "preview": {
+        "file": "comparison-isb-nmpc.gif",
+        "sha256": "695de7d2327511dae2c0cafcf3327701e9d317e92fc14c16df17834798e625d7",
+        "size_bytes": 1571341,
+        "processing": "8 fps, width480, 96 colors, looping, full output clip"
+      }
+    },
+    {
+      "file": "comparison-pslos.mp4",
+      "slide": 10,
+      "shape_name": "pslos_10x_count",
+      "pptx_member": "ppt/media/media15.mp4",
+      "source_sha256": "2f2cff97863ea9f1d5c2ecd60f32e78cf9cedf86feb250464c5496d6c7c43833",
+      "processing": {
+        "full_embedded_clip": true,
+        "additional_speed_factor": 1,
+        "audio": "removed",
+        "video": "H.264 CRF24, width1280, yuv420p, faststart"
+      },
+      "output_sha256": "7ee79d6c5dc8483bfdf97e7b02bb26b2dcddba1f7124a590172a8fe307a6d94b",
+      "output": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1280,
+            "height": 684,
+            "avg_frame_rate": "45/1"
+          }
+        ],
+        "format": {
+          "duration": "13.556000",
+          "size": "428671"
+        }
+      },
+      "preview": {
+        "file": "comparison-pslos.gif",
+        "sha256": "d145d1f3722bcd2dbf8380bb3bfe54cb46e0e1b57fd912ec716d967851a3c2f0",
+        "size_bytes": 1580402,
+        "processing": "8 fps, width480, 96 colors, looping, full output clip"
+      }
+    },
+    {
+      "file": "comparison-backstepping.mp4",
+      "slide": 10,
+      "shape_name": "backstepping_10x_count",
+      "pptx_member": "ppt/media/media16.mp4",
+      "source_sha256": "6133f312d34e3addf29d944abb151d6911ad8afbecc1400d10f6a6f999e1b8ff",
+      "processing": {
+        "full_embedded_clip": true,
+        "additional_speed_factor": 1,
+        "audio": "removed",
+        "video": "H.264 CRF24, width1280, yuv420p, faststart"
+      },
+      "output_sha256": "7140b3e8f181f5b5d282a3215b77ed45c2d7ca093536903589b55577c4a9ac58",
+      "output": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1280,
+            "height": 684,
+            "avg_frame_rate": "45/1"
+          }
+        ],
+        "format": {
+          "duration": "20.356000",
+          "size": "630633"
+        }
+      },
+      "preview": {
+        "file": "comparison-backstepping.gif",
+        "sha256": "c51f1a2d1a9f8a2f86c0cfab859dc25651ce2cbafdae05a3670b02926ef1ecb1",
+        "size_bytes": 2258630,
+        "processing": "8 fps, width480, 96 colors, looping, full output clip"
+      }
+    },
+    {
+      "file": "comparison-ibvs-los.mp4",
+      "slide": 10,
+      "shape_name": "IBVS_10x_count",
+      "pptx_member": "ppt/media/media17.mp4",
+      "source_sha256": "e78a8a99944b84431ea346f65aa1fa725ae3ccdd905c696b74c96dfa0f020a3d",
+      "processing": {
+        "full_embedded_clip": true,
+        "additional_speed_factor": 1,
+        "audio": "removed",
+        "video": "H.264 CRF24, width1280, yuv420p, faststart"
+      },
+      "output_sha256": "3dd8d2ade0fff8f2ca7e757a7a7062c1af15d7cedcf8b6bb6f24ed4ed0543ea4",
+      "output": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1280,
+            "height": 684,
+            "avg_frame_rate": "45/1"
+          }
+        ],
+        "format": {
+          "duration": "10.800000",
+          "size": "357084"
+        }
+      },
+      "preview": {
+        "file": "comparison-ibvs-los.gif",
+        "sha256": "5f194320edfcf72cee5be4e3671375eea7325d1b384bc27af470efed02b16a6f",
+        "size_bytes": 1308717,
+        "processing": "8 fps, width480, 96 colors, looping, full output clip"
+      }
+    }
+  ],
+  "recorded_or_processed_date": "2026-10-30",
+  "comparison_notes": "P10 original labels: ISB-NMPC, Backstepping, PS-LOS, IBVS-LOS. Embedded shapes are named 10x_count; no additional speed-up applied. Exact historical controller commit not verified.",
+  "simulation_recording": {
+    "workspace_head": "b86bf626baa6b018d85068a80aacf20a6bf29a41",
+    "workspace_had_uncommitted_changes": true,
+    "holydrone_head": "4c52ce0bf7cc5ef0001718a8aa7ba2f5a6882d9e",
+    "camera_file": "src/camera_driver/config/camera/camera_params_usb_imx577_30degree.yaml",
+    "camera_sha256": "62b4122579ea8ba5cf74e9bfa4f5b921d0a3c9b4ba29be4c905998b7a607e743",
+    "balloon_world_position_m": [
+      40,
+      0,
+      35
+    ],
+    "balloon_radius_m": 0.5,
+    "uav_collision_radius_m": 0.34,
+    "jitter_enabled": true,
+    "recording_motion_config": {
+      "balloons": [
+        {
+          "id": 1,
+          "pos": [
+            40.0,
+            0.0,
+            35.0
+          ],
+          "vel": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "interception_check_enabled": true,
+      "jitter_enabled": true,
+      "jitter_high_frequencies_hz": [
+        1.2,
+        3.7
+      ],
+      "jitter_high_rms_m": [
+        0.015,
+        0.04,
+        0.04
+      ],
+      "jitter_low_frequencies_hz": [
+        0.15,
+        0.26
+      ],
+      "jitter_low_rms_m": [
+        0.1,
+        0.3,
+        0.19
+      ],
+      "jitter_seed": 260927,
+      "keyboard_acceleration": 3.0,
+      "keyboard_key_timeout_sec": 0.25,
+      "keyboard_max_speed": 10.0,
+      "motion_mode": "keyboard",
+      "target_num": 1,
+      "trajectory_max_points": 12000,
+      "trajectory_min_distance": 0.05
+    },
+    "notes": "Single interception approach recorded after a preparation attempt and FSM return. UAV hover altitude before this approach was approximately 22 m in Gazebo world. Default repository scenario was not modified. RViz used a temporary viewpoint config. Gazebo camera frames and RViz viewport captured concurrently, not frame synchronized. Initial connection/camera warmup and final idle tail trimmed.",
+    "success_event": {
+      "reason": "swept_proximity",
+      "ros_time_sec": 385.718,
+      "distance_m": 0.811473,
+      "collision_radius_m": 0.84
+    }
+  },
+  "superseded_assets": [
+    {
+      "file": "simulation-rviz.mp4",
+      "source": "RViz viewport screen capture",
+      "recording_session": "e827c86c-d42f-11f1-b7ac-672cb549ef16",
+      "processing": {
+        "trim_start_wall_sec": 2,
+        "duration_sec": 13,
+        "additional_speed_factor": 1,
+        "video": "H.264 CRF23, yuv420p, faststart"
+      },
+      "same_trial": true,
+      "frame_synchronized": false,
+      "output_sha256": "3e64b1aa1474488929c887ff11ee10267b5b7d4d535cc07f662ec1566737edaa",
+      "output": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1280,
+            "height": 734,
+            "avg_frame_rate": "20/1"
+          }
+        ],
+        "format": {
+          "duration": "13.000000",
+          "size": "386434"
+        }
+      },
+      "preview": {
+        "file": "simulation-rviz.gif",
+        "sha256": "518f87ce524c1f6c0c0bd1e44ab8e0e4ed1cf52ecf53dd522955528a60ab55fc",
+        "size_bytes": 385149,
+        "processing": "8 fps, width480, 96 colors, looping, full output clip"
+      }
+    },
+    {
+      "file": "simulation-gazebo.mp4",
+      "source": "Gazebo /camera/tpv sensor_msgs/Image, wall-clock resampled to 20 fps",
+      "recording_session": "e827c86c-d42f-11f1-b7ac-672cb549ef16",
+      "processing": {
+        "trim_start_wall_sec": 2,
+        "duration_sec": 13,
+        "additional_speed_factor": 1,
+        "video": "H.264 CRF23, yuv420p, faststart"
+      },
+      "same_trial": true,
+      "frame_synchronized": false,
+      "output_sha256": "a1b104ae21aeef3552b17400cd818e8757320acdb94dd4835b0abc534cd0ca11",
+      "output": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 480,
+            "avg_frame_rate": "20/1"
+          }
+        ],
+        "format": {
+          "duration": "13.000000",
+          "size": "706595"
+        }
+      },
+      "preview": {
+        "file": "simulation-gazebo.gif",
+        "sha256": "4f595445be9c0bc13bbc16212bf752be5341dbd87ed3654b404d9098cff5f2a8",
+        "size_bytes": 4203140,
+        "processing": "8 fps, width480, 96 colors, looping, full output clip"
+      }
+    }
+  ],
+  "simulation_recording_status": "Historical recording replaced by recordings-20261101.json; superseded_assets hashes describe the previous files, not current paths."
+}

@@ -1,0 +1,16 @@
+# Target-manager and target-estimator settings for deterministic comparison.
+manager:
+  has_target_pos: true
+
+estimator:
+  q_image_timeout: 0.3
+  require_target_in_view: true
+  confirmation_frames: 3
+  max_tracking_jump_px: 80.0
+  max_tracking_jump_rate_px_s: 4000.0
+  pending_match_px: 30.0
+  lock_timeout: 0.5
+
+local_frame:
+  use_origin_topic: false
+  origin_topic: /local_frame/origin

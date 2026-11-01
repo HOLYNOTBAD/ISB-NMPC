@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>loop_simulation</name>
+  <version>0.0.0</version>
+  <description>Repeated closed-loop interception experiment orchestration and result collection.</description>
+
+  <maintainer email="wsh@todo.todo">wsh</maintainer>
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>gazebo_msgs</depend>
+  <exec_depend>python3-yaml</exec_depend>
+  <depend>quadrotor_msgs</depend>
+  <depend>rospy</depend>
+  <depend>std_msgs</depend>
+  <depend>std_srvs</depend>
+  <depend>swarm_msgs</depend>
+
+  <export/>
+</package>

@@ -1,0 +1,24 @@
+<launch>
+  <!--
+    Launch the interception baseline bridge node.
+
+    Usage:
+      roslaunch interception_baseline interception_baseline.launch
+  -->
+  <arg name="config" default="$(find interception_baseline)/config/default.yaml" />
+  <arg name="controller_type" default="" />
+  <arg name="attitude_target_topic" default="/mavros/setpoint_raw/attitude" />
+  <arg name="velocity_target_topic" default="/mavros/setpoint_velocity/cmd_vel" />
+  <arg name="acceleration_target_topic" default="/mavros/setpoint_raw/local" />
+
+
+  <node pkg="interception_baseline" type="interception_baseline_node.py"
+        name="interception_baseline_node" output="screen">
+    <rosparam command="load" file="$(arg config)" />
+    <param if="$(eval arg('controller_type') != '')"
+           name="controller_type" value="$(arg controller_type)" />
+    <param name="attitude_target_topic" value="$(arg attitude_target_topic)" />
+    <param name="velocity_target_topic" value="$(arg velocity_target_topic)" />
+    <param name="acceleration_target_topic" value="$(arg acceleration_target_topic)" />
+  </node>
+</launch>

@@ -1,0 +1,11 @@
+motion_mode: velocity
+target_num: 1
+trajectory_max_points: 12000
+trajectory_min_distance: 0.05
+
+balloons:
+  - id: 1
+    pos: [30.0, 0.0, 10.0]
+    vel: [3.0, 0.0, 0.0]
+
+interception_check_enabled: true

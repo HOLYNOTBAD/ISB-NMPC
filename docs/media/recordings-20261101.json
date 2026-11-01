@@ -1,0 +1,175 @@
+{
+  "recorded_date": "2026-11-01",
+  "workspace_head": "ae43a95baf09bfe2e11245632466fac2d7385e02",
+  "ros_session": "710d408c-d5af-11f1-b7ac-672cb549ef16",
+  "scenario": {
+    "camera_file": "src/camera_driver/config/camera/camera_params_usb_imx577_30degree.yaml",
+    "balloon_motion_config": {
+      "balloons": [
+        {
+          "id": 1,
+          "pos": [
+            40.0,
+            0.0,
+            35.0
+          ],
+          "vel": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "interception_check_enabled": true,
+      "motion_mode": "preset_traj",
+      "preset_traj_file": "config/trajectory/preset_balloon_traj_sine_5ms.csv",
+      "target_num": 1,
+      "trajectory_max_points": 12000,
+      "trajectory_min_distance": 0.05
+    },
+    "trajectory_file": "src/target_register/config/trajectory/preset_balloon_traj_sine_5ms.csv",
+    "trajectory_sha256": "dd002c9628ac8e00d1e078a0cb13621467600543afb66a5be85fc049dfdef797",
+    "balloon_start_world_m": [
+      40,
+      0,
+      35
+    ],
+    "balloon_impact_world_m": [
+      64.3312,
+      -4.02722,
+      35
+    ],
+    "uav_impact_world_m": [
+      63.9479,
+      -4.35641,
+      35.2803
+    ],
+    "balloon_radius_m": 0.5,
+    "uav_collision_radius_m": 0.34,
+    "impact_distance_m": 0.57779,
+    "success": true,
+    "success_reason": "swept_proximity",
+    "success_ros_time_sec": 68.084,
+    "state_transitions": [
+      {
+        "wall_seconds_from_camera_recording_start": -0.0475,
+        "ros_time_sec": 58.44,
+        "state": "WAIT_TARGET"
+      },
+      {
+        "wall_seconds_from_camera_recording_start": 0.7023,
+        "ros_time_sec": 59.19,
+        "state": "EXEC_INTERCEPTION"
+      },
+      {
+        "wall_seconds_from_camera_recording_start": 9.6135,
+        "ros_time_sec": 68.09,
+        "state": "FINISH_HOLD"
+      }
+    ],
+    "gazebo_model_name": "moving_balloon0"
+  },
+  "visualization": {
+    "rviz": "Full Baylands terrain and UAV mesh enabled. Software-rendered offline from the same trial ROS bag at 0.1x, exported at original simulation time scale.",
+    "gazebo_topic": "/camera/tpv",
+    "fpv_topic": "/camera/fpv_debug",
+    "tpv_follow": {
+      "offset_x": -2,
+      "offset_y": 0,
+      "offset_z": 1,
+      "position_alpha": 0.04,
+      "attitude_alpha": 0.08
+    }
+  },
+  "capture": {
+    "same_trial": true,
+    "frame_synchronized": false,
+    "notes": "Camera topics recorded together on a 20 Hz wall-clock schedule. RViz captured at 5 fps for 130 wall seconds during 0.1x playback, then restored to 13 seconds at original simulation speed. Views approximately aligned by ROS timestamps; not frame synchronized.",
+    "camera_frames_received": {
+      "gazebo": 253,
+      "fpv": 858
+    },
+    "telemetry_sha256": "cde727041e4f3fabac7d6c69e5c3db92d7a44eca0904a4eccfad40615dc2445b",
+    "source_bag_sha256": "81b13e63364e5f410d0a8f29d0fbcace62ad36adb6b9eb11ebe5e6f6589af676"
+  },
+  "assets": [
+    {
+      "file": "simulation-rviz.mp4",
+      "output_sha256": "673d7717e15a12a4d2072a485394cd83230527690651726cf25a74b9f76755b4",
+      "output": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 1280,
+            "height": 760,
+            "avg_frame_rate": "20/1"
+          }
+        ],
+        "format": {
+          "duration": "13.000000",
+          "size": "341189"
+        }
+      },
+      "processing": "0.1x ROS replay captured at 5 fps, setpts=0.1*(PTS-STARTPTS), exported at 20 fps, width1280, H.264 CRF22, yuv420p, faststart, no audio.",
+      "preview": {
+        "file": "simulation-rviz.gif",
+        "sha256": "302fde9499fd090ba96e183ec88dd71943c9b957d9d8835ee7211107c97e48ec",
+        "size_bytes": 559855,
+        "processing": "Full clip at 10 fps, width480, 96-color GIF, looping"
+      }
+    },
+    {
+      "file": "simulation-gazebo.mp4",
+      "output_sha256": "7e44dcd263ce134ae08020f540f8264dd232921bf744200ce1e5982d30325c6f",
+      "output": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 480,
+            "avg_frame_rate": "20/1"
+          }
+        ],
+        "format": {
+          "duration": "13.000000",
+          "size": "893597"
+        }
+      },
+      "processing": "H.264 CRF22, yuv420p, faststart, no audio, first 13 seconds at recorded speed",
+      "preview": {
+        "file": "simulation-gazebo.gif",
+        "sha256": "75f66096358ac3d7ca9670f362d5e6e2cd062a5dd2bb4ba6903f183d4ffc3055",
+        "size_bytes": 6407637,
+        "processing": "Full clip at 10 fps, width480, 96-color GIF, looping"
+      }
+    },
+    {
+      "file": "simulation-fpv-debug.mp4",
+      "output_sha256": "717edec49d454f6a7404f9b8451aeb0e621e0ef5fc4318d6e0f33ae800e6a092",
+      "output": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 640,
+            "height": 480,
+            "avg_frame_rate": "20/1"
+          }
+        ],
+        "format": {
+          "duration": "13.000000",
+          "size": "790369"
+        }
+      },
+      "processing": "H.264 CRF22, yuv420p, faststart, no audio, first 13 seconds at recorded speed",
+      "preview": {
+        "file": "simulation-fpv-debug.gif",
+        "sha256": "0120e30b0ae237699331dae098ef1898849193893410cf3826581b1fa53a3bde",
+        "size_bytes": 5444687,
+        "processing": "Full clip at 10 fps, width480, 96-color GIF, looping"
+      }
+    }
+  ]
+}

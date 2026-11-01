@@ -1,0 +1,44 @@
+<launch>
+  <arg name="param_file" default="$(find isb_nmpc)/config/holydrone/simulation/isb_nmpc_sim_outdoor_5ms_0degree.yaml" />
+  <arg name="has_target_pos" default="false" />
+  <arg name="attitude_target_topic" default="/nmpc/attitude_target" />
+  <arg name="state_estimate_topic" default="/nmpc/uavStateEstimate" />
+  <arg name="target_state_estimate_topic" default="/nmpc/targetStateEstimate" />
+  <arg name="q_image_topic" default="/nmpc/q_image" />
+  <arg name="target_in_main_view_topic" default="/nmpc/target_in_main_view" />
+  <arg name="fsm_state_topic" default="/fsm/fsm_state" />
+  <arg name="fsm_state_timeout" default="0.3" />
+  <arg name="uav_state_timeout" default="0.3" />
+  <arg name="current_target_topic" default="/target_manager/active_target" />
+  <arg name="failure_topic" default="/nmpc/failure" />
+  <arg name="solve_latency_topic" default="/isb_nmpc/solve_latency_ms" />
+  <arg name="control_command_topic" default="/isb_nmpc/control_command" />
+  <arg name="dry_run" default="false" />
+  <arg name="enable_log" default="true" />
+  <arg name="debug_log_dir" default="$(env HOME)/.ros/isb_nmpc/interception" />
+  <arg name="respawn" default="false" />
+  <arg name="restart_after_interception" default="false" />
+
+
+  <node pkg="isb_nmpc" type="so3_mpc_bridge_node" name="so3_mpc_bridge_node"
+        output="screen" respawn="$(arg respawn)" respawn_delay="0.5">
+    <rosparam file="$(arg param_file)" />
+    <param name="manager/has_target_pos" value="$(arg has_target_pos)" />
+    <param name="attitude_target_topic" value="$(arg attitude_target_topic)" />
+    <param name="state_estimate_topic" value="$(arg state_estimate_topic)" />
+    <param name="target_state_estimate_topic" value="$(arg target_state_estimate_topic)" />
+    <param name="q_image_topic" value="$(arg q_image_topic)" />
+    <param name="target_in_main_view_topic" value="$(arg target_in_main_view_topic)" />
+    <param name="fsm_state_topic" value="$(arg fsm_state_topic)" />
+    <param name="fsm_state_timeout" value="$(arg fsm_state_timeout)" />
+    <param name="uav_state_timeout" value="$(arg uav_state_timeout)" />
+    <param name="current_target_topic" value="$(arg current_target_topic)" />
+    <param name="failure_topic" value="$(arg failure_topic)" />
+    <param name="solve_latency_topic" value="$(arg solve_latency_topic)" />
+    <param name="control_command_topic" value="$(arg control_command_topic)" />
+    <param name="dry_run" value="$(arg dry_run)" />
+    <param name="enable_log" value="$(arg enable_log)" type="bool" />
+    <param name="debug_log_dir" value="$(arg debug_log_dir)" />
+    <param name="restart_after_interception" value="$(arg restart_after_interception)" />
+  </node>
+</launch>

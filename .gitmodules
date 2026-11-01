@@ -1,0 +1,3 @@
+[submodule "src/holydrone"]
+	path = src/holydrone_ros
+	url = https://github.com/HOLYNOTBAD/holydrone_ros.git

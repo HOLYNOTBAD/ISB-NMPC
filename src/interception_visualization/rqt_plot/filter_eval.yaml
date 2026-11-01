@@ -1,0 +1,22 @@
+window:
+  title: "Live Filter Evaluation"
+  width: 1400
+  height: 1000
+  history_s: 5.0
+
+plots:
+  - topics:
+      - /filter_eval/truth_hsv_u/data
+      - /filter_eval/truth_pos_u/data
+      - /filter_eval/filtered_u/data
+      - /filter_eval/raw_u/data
+
+  - topics:
+      - /filter_eval/truth_hsv_v/data
+      - /filter_eval/truth_pos_v/data
+      - /filter_eval/filtered_v/data
+      - /filter_eval/raw_v/data
+
+  - topics:
+      - /filter_eval/filtered_rmse_px/data
+      - /filter_eval/raw_hold_rmse_px/data

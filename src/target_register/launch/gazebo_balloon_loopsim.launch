@@ -1,0 +1,13 @@
+<launch>
+  <include file="$(find target_register)/launch/gazebo_balloon.launch">
+    <arg name="balloon_motion_file" value="$(find target_register)/config/balloon_motion/balloon_motion_preset_traj_sine_5ms_jitter.yaml"/>
+    <arg name="trial_sequence_file" value=""/>
+    <arg name="auto_advance_on_idle" value="false"/>
+    <arg name="balloon_radius" value="0.5"/>
+    <arg name="uav_collision_radius" value="0.34"/>
+    <arg name="uav_model_name" value="holydrone"/>
+    <arg name="spawn_on_start" value="false"/>
+    <arg name="spawn_relative_to_mav" value="true"/>
+    <arg name="id_marker_text_height" value="2.5"/>
+  </include>
+</launch>

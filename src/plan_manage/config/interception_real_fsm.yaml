@@ -1,0 +1,74 @@
+fsm:
+  type: interception
+
+manager:
+  has_target_pos: false
+
+interception:
+  # 真机默认由飞手起飞并切入 OFFBOARD；如需地面自动起飞，在此改为 ground_takeoff。
+  start_mode: airborne_takeover
+  offboard_takeover_hold_sec: 0.5
+  initialization:
+    settle_sec: 0.5
+    max_speed: 0.3
+    max_position_change: 0.2
+    max_yaw_change_deg: 5.0
+  offboard:
+    warmup_setpoints: 50
+    mode_request_interval: 2.0
+    arm_request_interval: 2.0
+  idle:
+    start_x: 0.0
+    start_y: 0.0
+    start_z: 15.0
+    vertical_speed: 4.0
+    horizontal_speed: 3.0
+    yaw_rate: 0.5
+    horizontal_kp: 1.5
+    horizontal_kd: 1.8
+    horizontal_ki: 0.0
+    horizontal_i_limit: 1.0
+    vertical_kp: 2.0
+    vertical_kd: 0.8
+    yaw_kp: 1.0
+    horizontal_accel: 2.0
+    vertical_accel: 1.5
+    velocity_bias_x: 0.0
+    velocity_bias_y: 0.0
+    position_tolerance: 0.3
+    frame_id: map
+  hold:
+    brake_speed_threshold: 0.3
+    brake_settle_time: 0.3
+    brake_timeout: 8.0
+  finish_hold:
+    brake_speed_threshold: 0.3
+    brake_settle_time: 0.3
+    brake_timeout: 8.0
+  failsafe:
+    max_abs_roll_deg: 80.0
+    mavros_state_timeout: 2.5
+    estimator_status_timeout: 2.5
+    local_state_timeout: 0.5
+  state_estimate:
+    topic: /nmpc/uavStateEstimate
+    fsm_state_topic: /fsm/fsm_state
+  target_state_estimate:
+    topic: /nmpc/targetStateEstimate
+    timeout: 0.5
+  exec:
+    motion_trigger_topic: /fsm/motion_trigger
+    intercepted_topic: /fsm/intercepted
+    nmpc_failure_topic: /nmpc/failure
+    detection_mode_topic: /target_detection/mode
+    terminal_lost_timeout: 0.05
+    terminal_mode_memory: 0.5
+    require_enter_confirmation: true
+    tracking_hold_enter_distance: 0.3
+    tracking_hold_exit_distance: 0.2
+    tracking_lost_distance: 0.5
+    tracking_lost_confirmation_sec: 0.15
+    tracking_max_hold_sec: 2.0
+    horizon_duration: 2.0
+    sample_dt: 0.1
+    horizon_points: 20
