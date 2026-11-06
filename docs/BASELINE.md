@@ -36,8 +36,6 @@ HIL、控制器对比、自动调参及其数据。仿真目标直接使用已�
 ```bash
 source /opt/ros/noetic/setup.bash
 source devel/setup.bash
-python3 -m unittest discover -s tests -v
-python3 src/plan_manage/test/start_modes_integration.py
 ```
 
 这些检查不等同于重新完成 Gazebo 拦截实验或实飞。实验视频应注明真实来源、日期和场景，
